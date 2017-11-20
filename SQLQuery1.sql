@@ -1,0 +1,1 @@
+﻿Insert into Products (itemName, description, itemImage, itemPrice, itemType, userID) values ('Chicken Snacker','A delicious chunk of chicken served in a soft sesame bun, with salad and Thousand Island sauce','C:\Users\Public\Pictures\Sample Pictures\Desert.jpg',25.3,'breakfast',1);
