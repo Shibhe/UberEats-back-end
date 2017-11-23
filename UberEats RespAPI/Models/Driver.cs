@@ -12,27 +12,20 @@ namespace UberEats_RespAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Driver
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
-        {
-            this.OnlineCarts = new HashSet<OnlineCart>();
-        }
-    
-        public int id { get; set; }
+        public int Id { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string phoneNumber { get; set; }
         public string email { get; set; }
         public string password { get; set; }
-        public string creditCard { get; set; }
-        public string CVV { get; set; }
-        public System.DateTime expiryDate { get; set; }
-        public string zipCode { get; set; }
+        public string city { get; set; }
+        public string inviteCode { get; set; }
+        public string transportType { get; set; }
         public string userRole { get; set; }
+        public Nullable<int> restID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OnlineCart> OnlineCarts { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
     }
 }

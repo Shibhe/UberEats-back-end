@@ -12,7 +12,7 @@ namespace UberEats_RespAPI.Controllers
 {
     public class BaseAPIControllerController : ApiController
     {
-        protected readonly UberEatsEntitiesApi db = new UberEatsEntitiesApi();
+        protected readonly UberEntity db = new UberEntity();
 
         protected HttpResponseMessage ToJson(dynamic obj)
         {

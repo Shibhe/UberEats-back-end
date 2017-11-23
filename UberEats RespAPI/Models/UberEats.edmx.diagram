@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="156448ac33a7443ca65b5056ea94ea89" Name="Diagram1">
+        <EntityTypeShape EntityType="UberEatsModel.Customer" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UberEatsModel.Driver" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UberEatsModel.OnlineCart" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UberEatsModel.Product" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="UberEatsModel.Restaurant" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="UberEatsModel.Cust_Cart" ManuallyRouted="false" />
+        <AssociationConnector Association="UberEatsModel.Rest_Driver" ManuallyRouted="false" />
+        <AssociationConnector Association="UberEatsModel.Prod_Cart" ManuallyRouted="false" />
+        <AssociationConnector Association="UberEatsModel.Rest_Cart" ManuallyRouted="false" />
+        <AssociationConnector Association="UberEatsModel.Rest_Products" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

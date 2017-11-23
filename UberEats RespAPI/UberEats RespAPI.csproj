@@ -186,7 +186,9 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BaseAPIControllerController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\DriversController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OnlineCartsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -194,28 +196,34 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>UberEatsModel.tt</DependentUpon>
+      <DependentUpon>UberEats.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Driver.cs">
+      <DependentUpon>UberEats.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OnlineCart.cs">
+      <DependentUpon>UberEats.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>UberEatsModel.tt</DependentUpon>
+      <DependentUpon>UberEats.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Restaurant.cs">
-      <DependentUpon>UberEatsModel.tt</DependentUpon>
+      <DependentUpon>UberEats.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UberEatsModel.Context.cs">
+    <Compile Include="Models\UberEats.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UberEatsModel.Context.tt</DependentUpon>
+      <DependentUpon>UberEats.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UberEatsModel.cs">
+    <Compile Include="Models\UberEats.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UberEatsModel.tt</DependentUpon>
+      <DependentUpon>UberEats.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UberEatsModel.Designer.cs">
+    <Compile Include="Models\UberEats.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UberEatsModel.edmx</DependentUpon>
+      <DependentUpon>UberEats.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -230,15 +238,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\UberEatsModel.Context.tt">
+    <Content Include="Models\UberEats.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UberEatsModel.edmx</DependentUpon>
-      <LastGenOutput>UberEatsModel.Context.cs</LastGenOutput>
+      <DependentUpon>UberEats.edmx</DependentUpon>
+      <LastGenOutput>UberEats.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\UberEatsModel.tt">
+    <Content Include="Models\UberEats.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UberEatsModel.edmx</DependentUpon>
-      <LastGenOutput>UberEatsModel.cs</LastGenOutput>
+      <DependentUpon>UberEats.edmx</DependentUpon>
+      <LastGenOutput>UberEats.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -264,12 +272,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\UberEatsModel.edmx">
+    <EntityDeploy Include="Models\UberEats.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UberEatsModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>UberEats.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\UberEatsModel.edmx.diagram">
-      <DependentUpon>UberEatsModel.edmx</DependentUpon>
+    <Content Include="Models\UberEats.edmx.diagram">
+      <DependentUpon>UberEats.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -277,7 +285,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

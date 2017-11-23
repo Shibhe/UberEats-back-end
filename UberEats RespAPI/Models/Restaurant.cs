@@ -17,6 +17,8 @@ namespace UberEats_RespAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Restaurant()
         {
+            this.Drivers = new HashSet<Driver>();
+            this.OnlineCarts = new HashSet<OnlineCart>();
             this.Products = new HashSet<Product>();
         }
     
@@ -36,6 +38,10 @@ namespace UberEats_RespAPI.Models
         public string zipCode { get; set; }
         public string userRole { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Driver> Drivers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OnlineCart> OnlineCarts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
     }

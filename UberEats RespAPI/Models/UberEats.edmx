@@ -21,6 +21,34 @@
           <Property Name="zipCode" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="userRole" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="inviteCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="transportType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userRole" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="restID" Type="int" />
+        </EntityType>
+        <EntityType Name="OnlineCart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="CustID" Type="int" Nullable="false" />
+          <Property Name="TotAmt" Type="money" Nullable="false" />
+          <Property Name="Quality" Type="int" Nullable="false" />
+          <Property Name="RestID" Type="int" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="90" Nullable="false" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Id" />
@@ -31,7 +59,6 @@
           <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="itemType" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="userID" Type="int" Nullable="false" />
-          <Property Name="itemImage" Type="varbinary(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Restaurant">
           <Key>
@@ -53,6 +80,54 @@
           <Property Name="zipCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="userRole" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="Cust_Cart">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="OnlineCart" Type="Self.OnlineCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OnlineCart">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Prod_Cart">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="OnlineCart" Type="Self.OnlineCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OnlineCart">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Rest_Cart">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="OnlineCart" Type="Self.OnlineCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OnlineCart">
+              <PropertyRef Name="RestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Rest_Driver">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
+          <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Driver">
+              <PropertyRef Name="restID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Rest_Products">
           <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -67,8 +142,26 @@
         </Association>
         <EntityContainer Name="UberEatsModelStoreContainer">
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OnlineCart" EntityType="Self.OnlineCart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Cust_Cart" Association="Self.Cust_Cart">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="OnlineCart" EntitySet="OnlineCart" />
+          </AssociationSet>
+          <AssociationSet Name="Prod_Cart" Association="Self.Prod_Cart">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OnlineCart" EntitySet="OnlineCart" />
+          </AssociationSet>
+          <AssociationSet Name="Rest_Cart" Association="Self.Rest_Cart">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="OnlineCart" EntitySet="OnlineCart" />
+          </AssociationSet>
+          <AssociationSet Name="Rest_Driver" Association="Self.Rest_Driver">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Driver" EntitySet="Driver" />
+          </AssociationSet>
           <AssociationSet Name="Rest_Products" Association="Self.Rest_Products">
             <End Role="Restaurant" EntitySet="Restaurant" />
             <End Role="Products" EntitySet="Products" />
@@ -94,6 +187,39 @@
           <Property Name="expiryDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="zipCode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="userRole" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="OnlineCarts" Relationship="Self.Cust_Cart" FromRole="Customer" ToRole="OnlineCart" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="inviteCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="transportType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="restID" Type="Int32" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.Rest_Driver" FromRole="Driver" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="OnlineCart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="CustID" Type="Int32" Nullable="false" />
+          <Property Name="TotAmt" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Quality" Type="Int32" Nullable="false" />
+          <Property Name="RestID" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.Cust_Cart" FromRole="OnlineCart" ToRole="Customer" />
+          <NavigationProperty Name="Product" Relationship="Self.Prod_Cart" FromRole="OnlineCart" ToRole="Products" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.Rest_Cart" FromRole="OnlineCart" ToRole="Restaurant" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -105,7 +231,7 @@
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="itemType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="userID" Type="Int32" Nullable="false" />
-          <Property Name="itemImage" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="OnlineCarts" Relationship="Self.Prod_Cart" FromRole="Products" ToRole="OnlineCart" />
           <NavigationProperty Name="Restaurant" Relationship="Self.Rest_Products" FromRole="Products" ToRole="Restaurant" />
         </EntityType>
         <EntityType Name="Restaurant">
@@ -127,8 +253,58 @@
           <Property Name="offerDelivery" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="zipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="userRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Drivers" Relationship="Self.Rest_Driver" FromRole="Restaurant" ToRole="Driver" />
+          <NavigationProperty Name="OnlineCarts" Relationship="Self.Rest_Cart" FromRole="Restaurant" ToRole="OnlineCart" />
           <NavigationProperty Name="Products" Relationship="Self.Rest_Products" FromRole="Restaurant" ToRole="Products" />
         </EntityType>
+        <Association Name="Cust_Cart">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="OnlineCart" Type="Self.OnlineCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OnlineCart">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Rest_Driver">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
+          <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Driver">
+              <PropertyRef Name="restID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Prod_Cart">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="OnlineCart" Type="Self.OnlineCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OnlineCart">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Rest_Cart">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="OnlineCart" Type="Self.OnlineCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OnlineCart">
+              <PropertyRef Name="RestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Rest_Products">
           <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
           <End Role="Products" Type="Self.Product" Multiplicity="*" />
@@ -141,10 +317,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="UberEatsEntitiesApi" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="UberEntity" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Drivers" EntityType="Self.Driver" />
+          <EntitySet Name="OnlineCarts" EntityType="Self.OnlineCart" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+          <AssociationSet Name="Cust_Cart" Association="Self.Cust_Cart">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="OnlineCart" EntitySet="OnlineCarts" />
+          </AssociationSet>
+          <AssociationSet Name="Rest_Driver" Association="Self.Rest_Driver">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Driver" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="Prod_Cart" Association="Self.Prod_Cart">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OnlineCart" EntitySet="OnlineCarts" />
+          </AssociationSet>
+          <AssociationSet Name="Rest_Cart" Association="Self.Rest_Cart">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="OnlineCart" EntitySet="OnlineCarts" />
+          </AssociationSet>
           <AssociationSet Name="Rest_Products" Association="Self.Rest_Products">
             <End Role="Restaurant" EntitySet="Restaurants" />
             <End Role="Products" EntitySet="Products" />
@@ -155,7 +349,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="UberEatsModelStoreContainer" CdmEntityContainer="UberEatsEntitiesApi">
+        <EntityContainerMapping StorageEntityContainer="UberEatsModelStoreContainer" CdmEntityContainer="UberEntity">
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="UberEatsModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
@@ -173,6 +367,36 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="UberEatsModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="inviteCode" ColumnName="inviteCode" />
+                <ScalarProperty Name="transportType" ColumnName="transportType" />
+                <ScalarProperty Name="userRole" ColumnName="userRole" />
+                <ScalarProperty Name="restID" ColumnName="restID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OnlineCarts">
+            <EntityTypeMapping TypeName="UberEatsModel.OnlineCart">
+              <MappingFragment StoreEntitySet="OnlineCart">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="TotAmt" ColumnName="TotAmt" />
+                <ScalarProperty Name="Quality" ColumnName="Quality" />
+                <ScalarProperty Name="RestID" ColumnName="RestID" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="UberEatsModel.Product">
               <MappingFragment StoreEntitySet="Products">
@@ -182,7 +406,6 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="itemType" ColumnName="itemType" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
-                <ScalarProperty Name="itemImage" ColumnName="itemImage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

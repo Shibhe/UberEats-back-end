@@ -12,44 +12,44 @@ using UberEats_RespAPI.Models;
 
 namespace UberEats_RespAPI.Controllers
 {
-    public class CustomersController : ApiController
+    public class DriversController : ApiController
     {
         private UberEntity db = new UberEntity();
 
-        // GET: api/Customers
-        public IQueryable<Customer> GetCustomers()
+        // GET: api/Drivers
+        public IQueryable<Driver> GetDrivers()
         {
-            return db.Customers;
+            return db.Drivers;
         }
 
-        // GET: api/Customers/5
-        [ResponseType(typeof(Customer))]
-        public IHttpActionResult GetCustomer(int id)
+        // GET: api/Drivers/5
+        [ResponseType(typeof(Driver))]
+        public IHttpActionResult GetDriver(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            Driver driver = db.Drivers.Find(id);
+            if (driver == null)
             {
                 return NotFound();
             }
 
-            return Ok(customer);
+            return Ok(driver);
         }
 
-        // PUT: api/Customers/5
+        // PUT: api/Drivers/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCustomer(int id, Customer customer)
+        public IHttpActionResult PutDriver(int id, Driver driver)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != customer.id)
+            if (id != driver.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(customer).State = EntityState.Modified;
+            db.Entry(driver).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace UberEats_RespAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(id))
+                if (!DriverExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace UberEats_RespAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Customers
-        [ResponseType(typeof(Customer))]
-        public IHttpActionResult PostCustomer(Customer customer)
+        // POST: api/Drivers
+        [ResponseType(typeof(Driver))]
+        public IHttpActionResult PostDriver(Driver driver)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Customers.Add(customer);
+            db.Drivers.Add(driver);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = customer.id }, customer);
+            return CreatedAtRoute("DefaultApi", new { id = driver.Id }, driver);
         }
 
-        // DELETE: api/Customers/5
-        [ResponseType(typeof(Customer))]
-        public IHttpActionResult DeleteCustomer(int id)
+        // DELETE: api/Drivers/5
+        [ResponseType(typeof(Driver))]
+        public IHttpActionResult DeleteDriver(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            Driver driver = db.Drivers.Find(id);
+            if (driver == null)
             {
                 return NotFound();
             }
 
-            db.Customers.Remove(customer);
+            db.Drivers.Remove(driver);
             db.SaveChanges();
 
-            return Ok(customer);
+            return Ok(driver);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,23 +110,23 @@ namespace UberEats_RespAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CustomerExists(int id)
+        private bool DriverExists(int id)
         {
-            return db.Customers.Count(e => e.id == id) > 0;
+            return db.Drivers.Count(e => e.Id == id) > 0;
         }
 
         // GET: api/Customers/5
-        [ResponseType(typeof(Customer))]
-        public Customer Login(string email, string password)
+        [ResponseType(typeof(Driver))]
+        public Driver Login(string email, string password)
         {
-            var cust = db.Customers.Where(customer => customer.email.Equals(email) && customer.password.Equals(password)).FirstOrDefault();
-            if (cust.email == null && cust.password == null)
+            var driv = db.Drivers.Where(driver => driver.email.Equals(email) && driver.password.Equals(password)).FirstOrDefault();
+            if (driv.email == null && driv.password == null)
             {
                 return (null);
             }
             else
             {
-                return cust;
+                return driv;
             }
         }
     }

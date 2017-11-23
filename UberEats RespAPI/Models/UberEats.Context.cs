@@ -13,10 +13,10 @@ namespace UberEats_RespAPI.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UberEatsEntitiesApi : DbContext
+    public partial class UberEntity : DbContext
     {
-        public UberEatsEntitiesApi()
-            : base("name=UberEatsEntitiesApi")
+        public UberEntity()
+            : base("name=UberEntity")
         {
         }
     
@@ -26,6 +26,8 @@ namespace UberEats_RespAPI.Models
         }
     
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Driver> Drivers { get; set; }
+        public virtual DbSet<OnlineCart> OnlineCarts { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Restaurant> Restaurants { get; set; }
     }

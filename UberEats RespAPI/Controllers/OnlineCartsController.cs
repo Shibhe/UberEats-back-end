@@ -12,44 +12,44 @@ using UberEats_RespAPI.Models;
 
 namespace UberEats_RespAPI.Controllers
 {
-    public class ProductsController : ApiController
+    public class OnlineCartsController : ApiController
     {
         private UberEntity db = new UberEntity();
 
-        // GET: api/Products
-        public IQueryable<Product> GetProducts()
+        // GET: api/OnlineCarts
+        public IQueryable<OnlineCart> GetOnlineCarts()
         {
-            return db.Products;
+            return db.OnlineCarts;
         }
 
-        // GET: api/Products/5
-        [ResponseType(typeof(Product))]
-        public IHttpActionResult GetProduct(int id)
+        // GET: api/OnlineCarts/5
+        [ResponseType(typeof(OnlineCart))]
+        public IHttpActionResult GetOnlineCart(int id)
         {
-            Product product = db.Products.Find(id);
-            if (product == null)
+            OnlineCart onlineCart = db.OnlineCarts.Find(id);
+            if (onlineCart == null)
             {
                 return NotFound();
             }
 
-            return Ok(product);
+            return Ok(onlineCart);
         }
 
-        // PUT: api/Products/5
+        // PUT: api/OnlineCarts/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutProduct(int id, Product product)
+        public IHttpActionResult PutOnlineCart(int id, OnlineCart onlineCart)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != product.Id)
+            if (id != onlineCart.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(product).State = EntityState.Modified;
+            db.Entry(onlineCart).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace UberEats_RespAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!OnlineCartExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace UberEats_RespAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Products
-        [ResponseType(typeof(Product))]
-        public IHttpActionResult PostProduct(Product product)
+        // POST: api/OnlineCarts
+        [ResponseType(typeof(OnlineCart))]
+        public IHttpActionResult PostOnlineCart(OnlineCart onlineCart)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Products.Add(product);
+            db.OnlineCarts.Add(onlineCart);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = product.Id }, product);
+            return CreatedAtRoute("DefaultApi", new { id = onlineCart.Id }, onlineCart);
         }
 
-        // DELETE: api/Products/5
-        [ResponseType(typeof(Product))]
-        public IHttpActionResult DeleteProduct(int id)
+        // DELETE: api/OnlineCarts/5
+        [ResponseType(typeof(OnlineCart))]
+        public IHttpActionResult DeleteOnlineCart(int id)
         {
-            Product product = db.Products.Find(id);
-            if (product == null)
+            OnlineCart onlineCart = db.OnlineCarts.Find(id);
+            if (onlineCart == null)
             {
                 return NotFound();
             }
 
-            db.Products.Remove(product);
+            db.OnlineCarts.Remove(onlineCart);
             db.SaveChanges();
 
-            return Ok(product);
+            return Ok(onlineCart);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace UberEats_RespAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ProductExists(int id)
+        private bool OnlineCartExists(int id)
         {
-            return db.Products.Count(e => e.Id == id) > 0;
+            return db.OnlineCarts.Count(e => e.Id == id) > 0;
         }
     }
 }
