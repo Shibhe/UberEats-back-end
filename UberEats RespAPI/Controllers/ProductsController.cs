@@ -17,9 +17,9 @@ namespace UberEats_RespAPI.Controllers
         private UberEntity db = new UberEntity();
 
         // GET: api/Products
-        public IQueryable<Product> GetProducts()
+        public IEnumerable<Product> GetProducts()
         {
-            return db.Products;
+            return db.Products.AsEnumerable();
         }
 
         // GET: api/Products/5
