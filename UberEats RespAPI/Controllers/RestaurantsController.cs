@@ -14,7 +14,7 @@ namespace UberEats_RespAPI.Controllers
 {
     public class RestaurantsController : ApiController
     {
-        private UberEntity db = new UberEntity();
+        private UberEatsEntities3 db = new UberEatsEntities3();
 
         // GET: api/Restaurants
         public IQueryable<Restaurant> GetRestaurants()

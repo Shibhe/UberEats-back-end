@@ -14,11 +14,11 @@ namespace UberEats_RespAPI.Models
     
     public partial class Product
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
-        {
-            this.OnlineCarts = new HashSet<OnlineCart>();
-        }
+       // [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+      //  public Product()
+       // {
+       //     this.OnlineCarts = new HashSet<OnlineCart>();
+      //  }
     
         public int Id { get; set; }
         public string itemName { get; set; }

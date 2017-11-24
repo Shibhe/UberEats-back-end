@@ -56,7 +56,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="itemName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="itemPrice" Type="float" Nullable="false" />
-          <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="itemType" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="userID" Type="int" Nullable="false" />
         </EntityType>
@@ -228,7 +228,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="itemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="itemPrice" Type="Double" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="itemType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="userID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="OnlineCarts" Relationship="Self.Prod_Cart" FromRole="Products" ToRole="OnlineCart" />
@@ -317,7 +317,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="UberEntity" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="UberEatsEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Drivers" EntityType="Self.Driver" />
           <EntitySet Name="OnlineCarts" EntityType="Self.OnlineCart" />
@@ -349,7 +349,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="UberEatsModelStoreContainer" CdmEntityContainer="UberEntity">
+        <EntityContainerMapping StorageEntityContainer="UberEatsModelStoreContainer" CdmEntityContainer="UberEatsEntities3">
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="UberEatsModel.Customer">
               <MappingFragment StoreEntitySet="Customer">

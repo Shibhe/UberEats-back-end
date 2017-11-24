@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="156448ac33a7443ca65b5056ea94ea89" Name="Diagram1">
+      <Diagram DiagramId="212c8aa916494c94b33f5b443f60666e" Name="Diagram1">
         <EntityTypeShape EntityType="UberEatsModel.Customer" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
         <EntityTypeShape EntityType="UberEatsModel.Driver" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="UberEatsModel.OnlineCart" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />

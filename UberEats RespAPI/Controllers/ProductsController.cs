@@ -14,12 +14,12 @@ namespace UberEats_RespAPI.Controllers
 {
     public class ProductsController : ApiController
     {
-        private UberEntity db = new UberEntity();
+        private UberEatsEntities3 db = new UberEatsEntities3();
 
         // GET: api/Products
-        public IEnumerable<Product> GetProducts()
+        public IQueryable<Product> GetProducts()
         {
-            return db.Products.AsEnumerable();
+            return db.Products;
         }
 
         // GET: api/Products/5

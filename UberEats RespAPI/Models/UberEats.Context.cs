@@ -13,10 +13,10 @@ namespace UberEats_RespAPI.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UberEntity : DbContext
+    public partial class UberEatsEntities3 : DbContext
     {
-        public UberEntity()
-            : base("name=UberEntity")
+        public UberEatsEntities3()
+            : base("name=UberEatsEntities3")
         {
         }
     
