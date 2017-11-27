@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="212c8aa916494c94b33f5b443f60666e" Name="Diagram1">
-        <EntityTypeShape EntityType="UberEatsModel.Customer" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="UberEatsModel.Driver" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="UberEatsModel.OnlineCart" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="UberEatsModel.Product" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="UberEatsModel.Restaurant" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+      <Diagram DiagramId="369a81135d034ea99062683f874e5fbc" Name="Diagram1">
+        <EntityTypeShape EntityType="UberEatsModel.Customer" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UberEatsModel.Driver" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UberEatsModel.OnlineCart" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UberEatsModel.Product" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UberEatsModel.Restaurant" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
         <AssociationConnector Association="UberEatsModel.Cust_Cart" ManuallyRouted="false" />
         <AssociationConnector Association="UberEatsModel.Rest_Driver" ManuallyRouted="false" />
         <AssociationConnector Association="UberEatsModel.Prod_Cart" ManuallyRouted="false" />

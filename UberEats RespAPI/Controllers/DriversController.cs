@@ -14,7 +14,7 @@ namespace UberEats_RespAPI.Controllers
 {
     public class DriversController : ApiController
     {
-        private UberEatsEntities3 db = new UberEatsEntities3();
+        private UberEntityModel db = new UberEntityModel();
 
         // GET: api/Drivers
         public IQueryable<Driver> GetDrivers()
@@ -115,7 +115,7 @@ namespace UberEats_RespAPI.Controllers
             return db.Drivers.Count(e => e.Id == id) > 0;
         }
 
-        // GET: api/Customers/5
+        // GET: api/Drivers/5
         [ResponseType(typeof(Driver))]
         public Driver Login(string email, string password)
         {

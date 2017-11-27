@@ -14,7 +14,7 @@ namespace UberEats_RespAPI.Controllers
 {
     public class CustomersController : ApiController
     {
-        private UberEatsEntities3 db = new UberEatsEntities3();
+        private UberEntityModel db = new UberEntityModel();
 
         // GET: api/Customers
         public IQueryable<Customer> GetCustomers()
@@ -115,18 +115,18 @@ namespace UberEats_RespAPI.Controllers
             return db.Customers.Count(e => e.id == id) > 0;
         }
 
-        // GET: api/Customers/5
+        // GET: api/Drivers/5
         [ResponseType(typeof(Customer))]
         public Customer Login(string email, string password)
         {
-            var cust = db.Customers.Where(customer => customer.email.Equals(email) && customer.password.Equals(password)).FirstOrDefault();
-            if (cust.email == null && cust.password == null)
+            var driv = db.Customers.Where(driver => driver.email.Equals(email) && driver.password.Equals(password)).FirstOrDefault();
+            if (driv.email == null && driv.password == null)
             {
                 return (null);
             }
             else
             {
-                return cust;
+                return driv;
             }
         }
     }

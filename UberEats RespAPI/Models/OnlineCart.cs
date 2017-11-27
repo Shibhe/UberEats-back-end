@@ -21,6 +21,7 @@ namespace UberEats_RespAPI.Models
         public int Quality { get; set; }
         public int RestID { get; set; }
         public string address { get; set; }
+        public bool status { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }

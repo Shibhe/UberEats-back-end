@@ -48,6 +48,7 @@
           <Property Name="Quality" Type="int" Nullable="false" />
           <Property Name="RestID" Type="int" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -217,6 +218,7 @@
           <Property Name="Quality" Type="Int32" Nullable="false" />
           <Property Name="RestID" Type="Int32" Nullable="false" />
           <Property Name="address" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.Cust_Cart" FromRole="OnlineCart" ToRole="Customer" />
           <NavigationProperty Name="Product" Relationship="Self.Prod_Cart" FromRole="OnlineCart" ToRole="Products" />
           <NavigationProperty Name="Restaurant" Relationship="Self.Rest_Cart" FromRole="OnlineCart" ToRole="Restaurant" />
@@ -317,7 +319,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="UberEatsEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="UberEntityModel" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Drivers" EntityType="Self.Driver" />
           <EntitySet Name="OnlineCarts" EntityType="Self.OnlineCart" />
@@ -349,7 +351,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="UberEatsModelStoreContainer" CdmEntityContainer="UberEatsEntities3">
+        <EntityContainerMapping StorageEntityContainer="UberEatsModelStoreContainer" CdmEntityContainer="UberEntityModel">
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="UberEatsModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
@@ -394,6 +396,7 @@
                 <ScalarProperty Name="Quality" ColumnName="Quality" />
                 <ScalarProperty Name="RestID" ColumnName="RestID" />
                 <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

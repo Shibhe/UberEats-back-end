@@ -14,7 +14,7 @@ namespace UberEats_RespAPI.Controllers
 {
     public class RestaurantsController : ApiController
     {
-        private UberEatsEntities3 db = new UberEatsEntities3();
+        private UberEntityModel db = new UberEntityModel();
 
         // GET: api/Restaurants
         public IQueryable<Restaurant> GetRestaurants()
@@ -115,18 +115,18 @@ namespace UberEats_RespAPI.Controllers
             return db.Restaurants.Count(e => e.Id == id) > 0;
         }
 
-        // GET: api/Customers/5
+        // GET: api/Drivers/5
         [ResponseType(typeof(Restaurant))]
         public Restaurant Login(string email, string password)
         {
-            var rest = db.Restaurants.Where(restaurant => restaurant.email.Equals(email) && restaurant.password.Equals(password)).FirstOrDefault();
-            if (rest.email == null && rest.password == null)
+            var driv = db.Restaurants.Where(driver => driver.email.Equals(email) && driver.password.Equals(password)).FirstOrDefault();
+            if (driv.email == null && driv.password == null)
             {
                 return (null);
             }
             else
             {
-                return rest;
+                return driv;
             }
         }
     }
