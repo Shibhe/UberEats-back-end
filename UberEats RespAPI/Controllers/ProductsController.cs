@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -12,16 +13,8 @@ namespace UberEats_RespAPI.Controllers
     public class ProductsController : ApiController
     {
         private UberEatsEntities7 db = new UberEatsEntities7();
-        // private Product prod = new Product();
         private IMapper _mapper;
         
-
-        public byte[] convertToByte(ProductDTO pr)
-        {
-            byte[] bytes = new byte[pr.itemImage.Length * sizeof(char)];
-            System.Buffer.BlockCopy(pr.itemImage.ToCharArray(), 0, bytes, 0, bytes.Length);
-            return bytes;
-        }
         // GET: api/Products
         public IQueryable<Product> GetProducts()
         {
@@ -78,29 +71,31 @@ namespace UberEats_RespAPI.Controllers
 
         // POST: api/Products
         [ResponseType(typeof(Product))]
-        public IHttpActionResult PostProduct(ProductDTO produ)
+        public IHttpActionResult PostProduct(ProductDTO proDto)
         {
-           var prod = _mapper.Map<Product>(produ);
-
+         
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            
+           // Product prod = new Product();
 
-            prod = new Product
-            {
-                Id=produ.Id,
-                itemImage = convertToByte(produ),
-                itemName = produ.itemName,
-                itemPrice = produ.itemPrice,
-                itemType = produ.itemType,
-                description = produ.description
-            };
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<ProductDTO, Product>()
+                .ForMember(img => img.itemImage, opt =>
+               // opt.ResolveUsing(s => s.itemImage != null ? Convert.FromBase64String(s.itemImage) : null));
+               opt.MapFrom(s => s.itemImage != null ? Convert.FromBase64String(s.itemImage) : null));
+            });
 
-            db.Products.Add(prod);
+            _mapper = config.CreateMapper();
+           
+            var userDto = _mapper.Map<Product>(proDto);    
+            
+            db.Products.Add(userDto);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = prod.Id }, prod);
+            return CreatedAtRoute("DefaultApi", new { id = userDto.Id }, userDto);
         }
 
         // DELETE: api/Products/5

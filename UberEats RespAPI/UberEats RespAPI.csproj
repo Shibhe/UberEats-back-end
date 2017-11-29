@@ -207,6 +207,7 @@
     <Compile Include="Models\OnlineCart.cs">
       <DependentUpon>UberEats.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OnlineCartDTO.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>UberEats.tt</DependentUpon>
     </Compile>
