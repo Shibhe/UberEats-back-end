@@ -78,10 +78,10 @@ namespace UberEats_RespAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            Console.WriteLine("Data: {0}", onlineCart);
+           
             db.OnlineCarts.Add(onlineCart);
             db.SaveChanges();
-
+           
             return CreatedAtRoute("DefaultApi", new { id = onlineCart.Id }, onlineCart);
         }
 

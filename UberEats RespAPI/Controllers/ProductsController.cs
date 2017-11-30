@@ -20,7 +20,7 @@ namespace UberEats_RespAPI.Controllers
         {
             return db.Products;
         }
-
+        
         // GET: api/Products/5
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)
@@ -126,6 +126,16 @@ namespace UberEats_RespAPI.Controllers
         private bool ProductExists(int id)
         {
             return db.Products.Count(e => e.Id == id) > 0;
+        }
+
+        // GET: api/Products/5
+        [ResponseType(typeof(Product))]
+        public IQueryable<Product> getProduct(int restID)
+        {
+            var products = db.Products.Where(user => user.userID == restID);
+
+            return products;
+
         }
     }
 }
