@@ -9,9 +9,7 @@
 
 namespace UberEats_RespAPI.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class OnlineCart
     {
         public int Id { get; set; }

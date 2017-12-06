@@ -119,6 +119,7 @@ namespace UberEats_RespAPI.Controllers
         [ResponseType(typeof(Restaurant))]
         public Restaurant Login(string email, string password)
         {
+
             var driv = db.Restaurants.Where(driver => driver.email.Equals(email) && driver.password.Equals(password)).FirstOrDefault();
             if (driv.email == null && driv.password == null)
             {

@@ -128,7 +128,7 @@ namespace UberEats_RespAPI.Controllers
             return db.Products.Count(e => e.Id == id) > 0;
         }
 
-        // GET: api/Products/5
+        // GET: api/Products?userID=1
         [ResponseType(typeof(Product))]
         public IQueryable<Product> getProduct(int restID)
         {

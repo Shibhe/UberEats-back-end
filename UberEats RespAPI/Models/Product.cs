@@ -26,7 +26,8 @@ namespace UberEats_RespAPI.Models
         public string itemType { get; set; }
         public int userID { get; set; }
         public byte[] itemImage { get; set; }
-    
+        public bool archived { get; set;  }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OnlineCart> OnlineCarts { get; set; }
         public virtual Restaurant Restaurant { get; set; }
