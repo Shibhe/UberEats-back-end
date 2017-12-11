@@ -14,5 +14,6 @@ namespace UberEats_RespAPI.Models
         public string itemType { get; set; }
         public int userID { get; set; }
         public string itemImage { get; set; }
+        public string archived { get; set; }
     }
 }
